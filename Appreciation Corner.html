@@ -425,8 +425,10 @@
             const statusDiv = document.getElementById('status-message');
             const submitButton = document.getElementById('submit-button');
             
-            // *** 關鍵 ***: 在這裡貼上您的 Power Automate HTTP POST URL
-            const powerAutomateURL = "在這裡貼上您從 Power Automate 取得的 HTTP POST URL";
+            // *** 關鍵 ***: 
+            // *** MODIFIED ***: 替換為一個有效的測試 URL。
+            // 部署時，您必須將此替換為您真實的 Power Automate URL。
+            const powerAutomateURL = "https://httpbin.org/post"; // <-- 範例 URL。請務必將此替換為您真實的 Power Automate URL
 
             // 1. 收集資料
             const senderName = document.getElementById('sender-name').value.trim();
