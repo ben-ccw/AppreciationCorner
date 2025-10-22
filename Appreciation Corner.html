@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appreciation Corner - 提交至 SharePoint</title>
+    <title>Appreciation Form</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         /* CSS 樣式保持不變... */
@@ -311,7 +311,7 @@
             <!-- Recipient Type Dropdown -->
             <div class="form-group">
                 <select id="recipient-type" onchange="updateFormFields()">
-                    <option value="">Select Recipient Type</option>
+                    <option value=""></option>
                     <option value="Office">Office</option>
                     <option value="CK">CK</option>
                     <option value="Shop">Shop</option>
@@ -426,9 +426,8 @@
             const submitButton = document.getElementById('submit-button');
             
             // *** 關鍵 ***: 
-            // *** MODIFIED ***: 替換為一個有效的測試 URL。
-            // 部署時，您必須將此替換為您真實的 Power Automate URL。
-            const powerAutomateURL = "https://httpbin.org/post"; // <-- 範例 URL。請務必將此替換為您真實的 Power Automate URL
+            // *** MODIFIED ***: 已更新為您提供的真實 Power Automate URL。
+            const powerAutomateURL = "https://defaultee852185feb2443884e299a17193b8.f2.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/f37c6290eaab4e9d886a45b27a86450d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9CjDpk0Ix10qbJuhgvbdfOJxAZnrQwx0FcJTxKCekZc"; // <-- 已更新為您的真實 URL
 
             // 1. 收集資料
             const senderName = document.getElementById('sender-name').value.trim();
@@ -538,11 +537,17 @@
             const submitButton = document.getElementById('submit-button');
 
             try {
-                // 優先嘗試新版 SharePoint (Modern UI)
-                if (window.pageContext && window.pageContext.user && window.pageContext.user.email) {
+                // *** NEW ***: 1. 優先從 URL 參數中讀取 Email
+                const urlParams = new URLSearchParams(window.location.search);
+                const emailFromUrl = urlParams.get('userEmail');
+
+                if (emailFromUrl) {
+                    userEmail = emailFromUrl;
+                } 
+                // 2. 其次，嘗試讀取 SharePoint Context (作為備用)
+                else if (window.pageContext && window.pageContext.user && window.pageContext.user.email) {
                     userEmail = window.pageContext.user.email;
                 } 
-                // 嘗試舊版 SharePoint (Classic UI)
                 else if (window._spPageContextInfo && window._spPageContextInfo.userEmail) {
                     userEmail = window._spPageContextInfo.userEmail;
                 }
@@ -575,4 +580,6 @@
     </script>
 </body>
 </html>
+
+
 
