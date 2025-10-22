@@ -411,6 +411,26 @@
         let selectedElements = [];
         let currentUserEmail = '';
 
+        // --- Iframe 動態高度調整 (開始) ---
+        function sendHeight() {
+            // 計算目前頁面的完整內容高度
+            const height = document.body.scrollHeight;
+            
+            // 將高度訊息發送到父視窗 (SharePoint)
+            // '*' 表示允許發送到任何網域，在受控環境中是可接受的
+            window.parent.postMessage({
+                type: 'appreciationFormResize',
+                height: height
+            }, '*');
+        }
+
+        // 頁面載入時，發送一次高度
+        window.addEventListener('load', sendHeight);
+        // 瀏覽器視窗大小改變時，重新發送高度
+        window.addEventListener('resize', sendHeight);
+        // --- Iframe 動態高度調整 (結束) ---
+
+
         function toggleSelection(element) {
             const index = selectedElements.indexOf(element);
             const card = document.querySelector(`.element-card.${element.toLowerCase()}`);
@@ -422,6 +442,7 @@
                 card.classList.remove('selected');
             }
             updateSelectedElementsList();
+            setTimeout(sendHeight, 100); // MODIFIED: 內容變更後，延遲 100ms 重新發送高度
         }
 
         function updateSelectedElementsList() {
@@ -451,6 +472,7 @@
                 businessUnitGroup.style.display = 'none';
                 shopNumberGroup.style.display = 'none';
             }
+            setTimeout(sendHeight, 100); // MODIFIED: 內容變更後，延遲 100ms 重新發送高度
         }
         
         async function sendAppreciation() {
@@ -539,6 +561,7 @@
                     document.getElementById('content').value = '';
                     updateSelectedElementsList();
                     updateFormFields();
+                    setTimeout(sendHeight, 100); // MODIFIED: 重設表單後，重新發送高度
 
                 } else {
                     statusDiv.innerHTML = "Error submitting form. Please try again. 提交時發生錯誤，請重試。";
@@ -593,8 +616,10 @@
             updateSelectedElementsList();
             updateFormFields(); 
             document.getElementById('recipient-type').value = "";
+            sendHeight(); // MODIFIED: 確保在所有內容初始化後，最後再發送一次高度
         };
     </script>
 </body>
 </html>
+
 
