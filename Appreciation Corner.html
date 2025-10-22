@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- MODIFIED: 語言改為繁體中文 -->
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
@@ -54,9 +55,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* This will vertically center the text */
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 100px; /* Added min-height for better uniformity */
         }
 
         .element-card:hover {
@@ -84,21 +86,20 @@
             box-sizing: border-box;
         }
 
-        .element-card svg {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 10px;
-        }
+        /* MODIFIED: Removed the svg rule */
 
         .element-card span {
             color: #fff;
-            font-size: 0.9rem;
+            /* MODIFIED: Increased font size and line height */
+            font-size: 1.1rem;
+            line-height: 1.4;
             font-weight: 500;
             text-align: center;
         }
 
         .element-card .chinese-text {
-            font-size: 0.8rem;
+            /* MODIFIED: Increased font size */
+            font-size: 0.9rem;
             opacity: 0.9;
         }
 
@@ -186,7 +187,8 @@
         .form-group select:focus + label,
         .form-group input:focus + label,
         .form-group textarea:focus + label,
-        .form-group select:not([value=""]) + label,
+        /* MODIFIED: CSS selector for select changed to :valid for better float label behavior */
+        .form-group select:valid + label,
         .form-group input:not(:placeholder-shown) + label,
         .form-group textarea:not(:placeholder-shown) + label {
             top: -10px;
@@ -251,43 +253,33 @@
 </head>
 <body>
     <div class="appreciation-container">
-        <!-- Title -->
-        <h1 class="page-title">Appreciation Corner</h1>
+        <!-- MODIFIED: 標題中英雙語 -->
+        <h1 class="page-title">Appreciation Corner 讚賞角落</h1>
 
-        <!-- Multi-Select Cards (保持不變) -->
+        <!-- Multi-Select Cards (文字已修正) -->
         <div class="elements-row">
+             <!-- MODIFIED: Removed SVG Icon -->
              <div class="element-card accountability" onclick="toggleSelection('Accountability')" aria-label="Select Accountability">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                </svg>
                 <span>Accountability</span>
                 <span class="chinese-text">承擔責任</span>
             </div>
+             <!-- MODIFIED: Removed SVG Icon -->
             <div class="element-card creativity" onclick="toggleSelection('Creativity')" aria-label="Select Creativity">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v2H9v2h2v2h2v-2h2v-2h-2z"/>
-                </svg>
                 <span>Creativity</span>
                 <span class="chinese-text">具創造力</span>
             </div>
+            <!-- MODIFIED: Empathy 中文修正, Removed SVG Icon -->
             <div class="element-card empathy" onclick="toggleSelection('Empathy')" aria-label="Select Empathy">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-9h2v2h-2zm0 4h2v2h-2z"/>
-                </svg>
                 <span>Empathy</span>
-                <span class="chinese-text">耐周理心</span>
+                <span class="chinese-text">富同理心</span>
             </div>
+            <!-- MODIFIED: Integrity 中文修正, Removed SVG Icon -->
             <div class="element-card integrity" onclick="toggleSelection('Integrity')" aria-label="Select Integrity">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-11h2v6h-2zm0 8h2v2h-2z"/>
-                </svg>
                 <span>Integrity</span>
-                <span class="chinese-text">學誠值</span>
+                <span class="chinese-text">堅守誠信</span>
             </div>
+             <!-- MODIFIED: Removed SVG Icon -->
             <div class="element-card teamwork" onclick="toggleSelection('Teamwork')" aria-label="Select Teamwork">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-                </svg>
                 <span>Teamwork</span>
                 <span class="chinese-text">團隊合作</span>
             </div>
@@ -297,27 +289,30 @@
         <div class="form-container" id="form-container">
             <!-- Selected Elements List -->
             <div class="selected-elements">
-                <strong>Selected Elements:</strong>
+                <!-- MODIFIED: 中英雙語 -->
+                <strong>Selected Elements 已選項目:</strong>
                 <ul id="selected-elements-list"></ul>
             </div>
             
-            <!-- *** MODIFIED *** Sender (名稱已改, 邏輯已改) -->
+            <!-- Sender -->
             <div class="form-group" id="sender-group">
-                <!-- 預設為可編輯 (readonly = false) -->
                 <input type="text" id="sender-name" placeholder=" ">
-                <label for="sender-name">Sender</label>
+                <!-- MODIFIED: 中英雙語 -->
+                <label for="sender-name">Sender 寄件者</label>
             </div>
 
             <!-- Recipient Type Dropdown -->
             <div class="form-group">
-                <select id="recipient-type" onchange="updateFormFields()">
+                <!-- MODIFIED: Added 'required' attribute -->
+                <select id="recipient-type" onchange="updateFormFields()" required>
                     <option value=""></option>
                     <option value="Office">Office</option>
                     <option value="CK">CK</option>
                     <option value="Shop">Shop</option>
                     <option value="Others">Others</option>
                 </select>
-                <label for="recipient-type">Recipient Type</label>
+                <!-- MODIFIED: 中英雙語並更改名稱 -->
+                <label for="recipient-type">Recipient Category 對象類別</label>
             </div>
 
             <!-- Business Unit (for Shop, now a dropdown) -->
@@ -329,29 +324,34 @@
                     <option value="CCC Business Unit">CCC Business Unit</option>
                     <option value="DDD Business Unit">DDD Business Unit</option>
                 </select>
-                <label for="business-unit">Business Unit</label>
+                <!-- MODIFIED: 中英雙語 -->
+                <label for="business-unit">Business Unit 業務單位</label>
             </div>
 
             <!-- Shop Number (for Shop) -->
             <div class="form-group" id="shop-number-group" style="display: none;">
                 <input type="text" id="shop-number" placeholder=" ">
-                <label for="shop-number">Shop Number</label>
+                <!-- MODIFIED: 中英雙語 -->
+                <label for="shop-number">Shop Number 店舖編號</label>
             </div>
 
             <!-- Recipient -->
             <div class="form-group" id="recipient-group">
                 <input type="text" id="recipient" placeholder=" ">
-                <label for="recipient">Recipient</label>
+                <!-- MODIFIED: 中英雙語並更改名稱 -->
+                <label for="recipient">Recipient 讚賞對象</label>
             </div>
 
             <!-- Content -->
             <div class="form-group" id="content-group">
                 <textarea id="content" placeholder=" "></textarea>
-                <label for="content">Content</label>
+                <!-- MODIFIED: 中英雙語 -->
+                <label for="content">Content 內容</label>
             </div>
 
             <!-- Buttons -->
-            <button class="send-button" id="submit-button" onclick="sendAppreciation()">Send Appreciation</button>
+            <!-- MODIFIED: 中英雙語 -->
+            <button class="send-button" id="submit-button" onclick="sendAppreciation()">Send Appreciation 傳送讚賞</button>
             
             <!-- 狀態訊息 Div -->
             <div id="status-message"></div>
@@ -384,7 +384,8 @@
             const list = document.getElementById('selected-elements-list');
             list.innerHTML = '';
             if (selectedElements.length === 0) {
-                list.innerHTML = '<li>None</li>';
+                // MODIFIED: 中英雙語
+                list.innerHTML = '<li>None 沒有</li>';
             } else {
                 selectedElements.forEach(element => {
                     const li = document.createElement('li');
@@ -394,7 +395,7 @@
             }
         }
 
-        // *** MODIFIED ***: Update form fields (調整高度計算)
+        // Update form fields (保持不變)
         function updateFormFields() {
             const recipientType = document.getElementById('recipient-type').value;
             const businessUnitGroup = document.getElementById('business-unit-group');
@@ -407,7 +408,6 @@
             // 基礎高度 (RecipientType + Recipient + Content)
             let formHeight = 400; 
             
-            // *** MODIFIED ***: 如果 Sender 欄位是可見的，才增加其高度
             if (senderGroup.style.display !== 'none') {
                 formHeight += 70; // 增加 Sender 欄位的高度
             }
@@ -426,14 +426,13 @@
             formContainer.style.height = `${formHeight}px`;
         }
         
-        // Send Appreciation (函數保持不變, 它會自動讀取 readonly 欄位的值)
+        // Send Appreciation
         async function sendAppreciation() {
             const statusDiv = document.getElementById('status-message');
             const submitButton = document.getElementById('submit-button');
             
-            // *** 關鍵 ***: 
-            // *** MODIFIED ***: 已更新為您提供的真實 Power Automate URL。
-            const powerAutomateURL = "https://defaultee852185feb2443884e299a17193b8.f2.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/f37c6290eaab4e9d886a45b27a86450d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9CjDpk0Ix10qbJuhgvbdfOJxAZnrQwx0FcJTxKCekZc"; // <-- 已更新為您的真實 URL
+            // 您的真實 Power Automate URL
+            const powerAutomateURL = "https://defaultee852185feb2443884e299a17193b8.f2.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/f37c6290eaab4e9d886a45b27a86450d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9CjDpk0Ix10qbJuhgvbdfOJxAZnrQwx0FcJTxKCekZc"; 
 
             // 1. 收集資料
             const senderName = document.getElementById('sender-name').value.trim();
@@ -444,42 +443,42 @@
             const content = document.getElementById('content').value.trim();
             const currentDate = new Date().toISOString();
 
-            // 2. 驗證 (Validation)
-            // *** MODIFIED ***: 簡化驗證, 只需確保不為空
+            // 2. 驗證 (Validation) - MODIFIED: 中英雙語
             if (!senderName) {
-                // 如果 senderName 是空的 (不論是隱藏還是手動) 都不允許提交
-                alert('無法獲取 Sender 資訊或 Sender 欄位為空。');
+                alert('Cannot get Sender information or Sender field is empty. 無法獲取寄件者資訊或欄位為空。');
                 return;
             }
             if (!recipientType) {
-                alert('請選擇 Recipient Type。');
+                // MODIFIED: 更新提示文字
+                alert('Please select a Recipient Category. 請選擇對象類別。');
                 return;
             }
             if (!recipientName) {
-                alert('請填寫 Recipient 欄位。');
+                // MODIFIED: 更新提示文字
+                alert('Please fill in the Recipient field. 請填寫讚賞對象欄位。');
                 return;
             }
             if (recipientType === 'Shop' && (!businessUnit || businessUnit === 'Select Business Unit' || !shopNumber)) {
-                alert('請選擇 Business Unit 並填寫 Shop Number。');
+                alert('Please select a Business Unit and fill in the Shop Number. 請選擇業務單位並填寫店舖編號。');
                 return;
             }
             if (!content) {
-                alert('請填寫 Content 欄位。');
+                alert('Please fill in the Content field. 請填寫內容欄位。');
                 return;
             }
             if (selectedElements.length === 0) {
-                alert('請至少選擇一個 Element。');
+                alert('Please select at least one Element. 請至少選擇一個項目。');
                 return;
             }
 
-            // 3. 禁用按鈕並顯示提交中
+            // 3. 禁用按鈕並顯示提交中 - MODIFIED: 中英雙語
             submitButton.disabled = true;
-            statusDiv.innerHTML = "Submitting...";
+            statusDiv.innerHTML = "Submitting 提交中...";
             statusDiv.className = "";
 
             // 4. 建立要傳送的 JSON 承載 (Payload)
             const payload = {
-                sender_name: senderName, // 這裡會是 Email (如果抓到) 或手動輸入的文字
+                sender_name: senderName, 
                 recipient_name: recipientName,
                 content: content,
                 elements: selectedElements,
@@ -489,7 +488,7 @@
                 date: currentDate
             };
             
-            // 5. 使用 fetch API 傳送資料 (保持不變)
+            // 5. 使用 fetch API 傳送資料
             try {
                 const response = await fetch(powerAutomateURL, {
                     method: 'POST',
@@ -500,21 +499,18 @@
                 });
 
                 if (response.ok) {
-                    // *** MODIFIED ***: 根據您的要求修改成功訊息
+                    // MODIFIED: 中英雙語
                     if (currentUserEmail) {
-                        // 如果成功抓取到 Email (即欄位被隱藏)
                         statusDiv.innerHTML = "Appreciation sent successfully! by " + currentUserEmail;
                     } else {
-                        // 如果是手動輸入
-                        statusDiv.innerHTML = "Appreciation sent successfully!";
+                        statusDiv.innerHTML = "Appreciation sent successfully! 讚賞已成功傳送！";
                     }
                     statusDiv.className = "success";
                     
-                    // 重設表單
+                    // 重設表單 (邏輯不變)
                     selectedElements = [];
                     document.querySelectorAll('.element-card').forEach(card => card.classList.remove('selected'));
                     
-                    // *** MODIFIED ***: 只有在 Sender 欄位非唯讀 (即手動輸入) 時才清空
                     const senderInput = document.getElementById('sender-name');
                     if (!senderInput.readOnly) {
                         senderInput.value = '';
@@ -529,30 +525,31 @@
                     updateFormFields();
 
                 } else {
-                    statusDiv.innerHTML = "Error submitting form. Please try again.";
+                    // MODIFIED: 中英雙語
+                    statusDiv.innerHTML = "Error submitting form. Please try again. 提交時發生錯誤，請重試。";
                     statusDiv.className = "error";
                 }
 
             } catch (error) {
                 console.error('Error:', error);
-                statusDiv.innerHTML = "Network error. Please check your connection.";
+                // MODIFIED: 中英雙語
+                statusDiv.innerHTML = "Network error. Please check your connection. 網絡錯誤，請檢查您的連線。";
                 statusDiv.className = "error";
             } finally {
                 submitButton.disabled = false;
             }
         }
 
-        // *** MODIFIED LOGIC ***
         // 頁面載入時執行
         window.onload = function() {
             let userEmail = '';
             const senderInput = document.getElementById('sender-name');
-            const senderGroup = document.getElementById('sender-group'); // *** NEW ***
+            const senderGroup = document.getElementById('sender-group');
             const statusDiv = document.getElementById('status-message');
             const submitButton = document.getElementById('submit-button');
 
             try {
-                // *** NEW ***: 1. 優先從 URL 參數中讀取 Email
+                // 1. 優先從 URL 參數中讀取 Email
                 const urlParams = new URLSearchParams(window.location.search);
                 const emailFromUrl = urlParams.get('userEmail');
 
@@ -572,28 +569,28 @@
                     currentUserEmail = userEmail;
                     senderInput.value = userEmail;
                     senderInput.readOnly = true;
-                    senderGroup.style.display = 'none'; // *** NEW: 隱藏欄位 ***
-                    // 讓 label 浮上去 (雖然隱藏了，但以防萬一)
-                    senderInput.classList.add('not-placeholder-shown'); 
+                    senderGroup.style.display = 'none'; 
                 } else {
                     // 錯誤：不在 SharePoint 環境中：保持欄位可編輯
-                    console.warn("SharePoint context not found. Reverting to manual Sender input.");
+                    // MODIFIED: 中英雙語
+                    console.warn("SharePoint context not found. Reverting to manual Sender input. 找不到 SharePoint 內容，切換至手動輸入 Sender。");
                     senderInput.readOnly = false;
-                    senderGroup.style.display = 'block'; // 確保可見
+                    senderGroup.style.display = 'block'; 
                     submitButton.disabled = false;
                 }
 
             } catch (e) {
                 // 其他未預期錯誤：保持欄位可編輯，但在 console 記錄錯誤
-                console.error("Error auto-detecting user (falling back to manual input):", e);
+                // MODIFIED: 中英雙語
+                console.error("Error auto-detecting user (falling back to manual input): 自動偵測使用者時發生錯誤（切換至手動輸入）：", e);
                 senderInput.readOnly = false;
-                senderGroup.style.display = 'block'; // 確保可見
+                senderGroup.style.display = 'block'; 
                 submitButton.disabled = false;
             }
 
             // 初始化表單
             updateSelectedElementsList();
-            updateFormFields(); // *** 重新計算表單高度 ***
+            updateFormFields(); 
         };
     </script>
 </body>
