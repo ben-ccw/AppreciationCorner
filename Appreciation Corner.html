@@ -394,7 +394,7 @@
             }
         }
 
-        // Update form fields based on recipient type (保持不變)
+        // *** MODIFIED ***: Update form fields (調整高度計算)
         function updateFormFields() {
             const recipientType = document.getElementById('recipient-type').value;
             const businessUnitGroup = document.getElementById('business-unit-group');
@@ -404,7 +404,14 @@
             const formContainer = document.getElementById('form-container');
             const senderGroup = document.getElementById('sender-group');
 
-            let formHeight = 470; // 基礎高度 (Sender + RecipientType + Recipient + Content)
+            // 基礎高度 (RecipientType + Recipient + Content)
+            let formHeight = 400; 
+            
+            // *** MODIFIED ***: 如果 Sender 欄位是可見的，才增加其高度
+            if (senderGroup.style.display !== 'none') {
+                formHeight += 70; // 增加 Sender 欄位的高度
+            }
+
             if (recipientType === 'Shop') {
                 businessUnitGroup.style.display = 'block';
                 shopNumberGroup.style.display = 'block';
@@ -414,7 +421,6 @@
                 shopNumberGroup.style.display = 'none';
             }
             
-            senderGroup.style.display = 'block';
             recipientGroup.style.display = 'block';
             contentGroup.style.display = 'block';
             formContainer.style.height = `${formHeight}px`;
@@ -441,7 +447,8 @@
             // 2. 驗證 (Validation)
             // *** MODIFIED ***: 簡化驗證, 只需確保不為空
             if (!senderName) {
-                alert('請填寫 Sender 欄位。');
+                // 如果 senderName 是空的 (不論是隱藏還是手動) 都不允許提交
+                alert('無法獲取 Sender 資訊或 Sender 欄位為空。');
                 return;
             }
             if (!recipientType) {
@@ -493,7 +500,14 @@
                 });
 
                 if (response.ok) {
-                    statusDiv.innerHTML = "Appreciation sent successfully!";
+                    // *** MODIFIED ***: 根據您的要求修改成功訊息
+                    if (currentUserEmail) {
+                        // 如果成功抓取到 Email (即欄位被隱藏)
+                        statusDiv.innerHTML = "Appreciation sent successfully! by " + currentUserEmail;
+                    } else {
+                        // 如果是手動輸入
+                        statusDiv.innerHTML = "Appreciation sent successfully!";
+                    }
                     statusDiv.className = "success";
                     
                     // 重設表單
@@ -533,6 +547,7 @@
         window.onload = function() {
             let userEmail = '';
             const senderInput = document.getElementById('sender-name');
+            const senderGroup = document.getElementById('sender-group'); // *** NEW ***
             const statusDiv = document.getElementById('status-message');
             const submitButton = document.getElementById('submit-button');
 
@@ -553,16 +568,18 @@
                 }
 
                 if (userEmail) {
-                    // 成功抓取：自動填入並設為唯讀
+                    // 成功抓取：自動填入、設為唯讀、並隱藏
                     currentUserEmail = userEmail;
                     senderInput.value = userEmail;
                     senderInput.readOnly = true;
-                    // 讓 label 浮上去
+                    senderGroup.style.display = 'none'; // *** NEW: 隱藏欄位 ***
+                    // 讓 label 浮上去 (雖然隱藏了，但以防萬一)
                     senderInput.classList.add('not-placeholder-shown'); 
                 } else {
                     // 錯誤：不在 SharePoint 環境中：保持欄位可編輯
                     console.warn("SharePoint context not found. Reverting to manual Sender input.");
                     senderInput.readOnly = false;
+                    senderGroup.style.display = 'block'; // 確保可見
                     submitButton.disabled = false;
                 }
 
@@ -570,16 +587,15 @@
                 // 其他未預期錯誤：保持欄位可編輯，但在 console 記錄錯誤
                 console.error("Error auto-detecting user (falling back to manual input):", e);
                 senderInput.readOnly = false;
+                senderGroup.style.display = 'block'; // 確保可見
                 submitButton.disabled = false;
             }
 
             // 初始化表單
             updateSelectedElementsList();
-            updateFormFields();
+            updateFormFields(); // *** 重新計算表單高度 ***
         };
     </script>
 </body>
 </html>
-
-
 
