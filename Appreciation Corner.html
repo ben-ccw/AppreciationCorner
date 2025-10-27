@@ -201,7 +201,7 @@
             grid-column: 1 / -1;
         }
 
-        .form-group select,
+        /* [MODIFIED] Removed 'select' from this rule */
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -219,7 +219,7 @@
             cursor: not-allowed;
         }
 
-        .form-group select:focus,
+        /* [MODIFIED] Removed 'select' from this rule */
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
@@ -242,10 +242,9 @@
             pointer-events: none;
         }
 
-        .form-group select:valid + label,
+        /* [MODIFIED] Removed 'select' specific selectors from this rule */
         .form-group input:not(:placeholder-shown) + label,
         .form-group textarea:not(:placeholder-shown) + label,
-        .form-group select:focus + label,
         .form-group input:focus + label,
         .form-group textarea:focus + label {
             top: -10px;
@@ -256,13 +255,8 @@
             padding: 0 5px;
         }
         
-        .form-group select:invalid {
-            color: #888;
-        }
-        
-        .form-group select option {
-            color: #333;
-        }
+        /* [REMOVED] Deleted .form-group select:invalid rule */
+        /* [REMOVED] Deleted .form-group select option rule */
 
         .form-actions {
             text-align: center;
@@ -448,25 +442,15 @@
                     <label for="recipient">Recipient 讚賞對象</label>
                 </div>
 
+                <!-- [MODIFIED] Changed from <select> to <input> -->
                 <div class="form-group">
-                    <select id="recipient-type" required>
-                        <option value="" disabled selected></option>
-                        <option value="Office">Office</option>
-                        <option value="CK">CK</option>
-                        <option value="Shop">Shop</option>
-                        <option value="Others">Others</option>
-                    </select>
+                    <input type="text" id="recipient-type" placeholder=" ">
                     <label for="recipient-type">Recipient Category 對象類別</label>
                 </div>
 
+                <!-- [MODIFIED] Changed from <select> to <input> -->
                 <div class="form-group" id="business-unit-group">
-                    <select id="business-unit" required>
-                        <option value="" disabled selected></option>
-                        <option value="AAA Business Unit">AAA Business Unit</option>
-                        <option value="BBB Business Unit">BBB Business Unit</option>
-                        <option value="CCC Business Unit">CCC Business Unit</option>
-                        <option value="DDD Business Unit">DDD Business Unit</option>
-                    </select>
+                    <input type="text" id="business-unit" placeholder=" ">
                     <label for="business-unit">Business Unit 業務單位</label>
                 </div>
 
@@ -554,8 +538,10 @@
             const powerAutomateURL = "https://defaultee852185feb2443884e299a17193b8.f2.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/f37c6290eaab4e9d886a45b27a86450d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9CjDpk0Ix10qbJuhgvbdfOJxAZnrQwx0FcJTxKCekZc"; 
 
             const senderName = document.getElementById('sender-name').value.trim();
-            const recipientType = document.getElementById('recipient-type').value;
-            const businessUnit = document.getElementById('business-unit').value;
+            // [MODIFIED] Reading from input, .value still works
+            const recipientType = document.getElementById('recipient-type').value.trim();
+            const businessUnit = document.getElementById('business-unit').value.trim();
+            // ---
             const shopNumber = document.getElementById('shop-number').value.trim();
             const recipientName = document.getElementById('recipient').value.trim();
             const content = document.getElementById('content').value.trim();
@@ -622,10 +608,12 @@
                         senderInput.value = '';
                     }
 
+                    // [MODIFIED] Clear input fields
                     document.getElementById('recipient-type').value = '';
+                    document.getElementById('business-unit').value = '';
+                    // ---
                     document.getElementById('recipient').value = '';
                     document.getElementById('content').value = '';
-                    document.getElementById('business-unit').value = '';
                     document.getElementById('shop-number').value = '';
                     updateSelectedElementsList();
 
@@ -694,4 +682,3 @@
     </script>
 </body>
 </html>
-
